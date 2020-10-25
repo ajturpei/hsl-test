@@ -98,7 +98,7 @@ const Menu = () => {
         <InputSlider
           name="radius"
           type="range"
-          min="0"
+          min="20"
           step="20"
           max={config.maxRadius}
           value={radiusInputValue}

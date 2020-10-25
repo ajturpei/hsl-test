@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import StopInformation from "./StopInformation";
+import { StopProps, StopTimesProps } from "../types/hslDataTypes";
 
 const TransportInfoContainer = styled.div`
   margin-top: 0.5rem;
@@ -12,12 +13,12 @@ const TransportInfoHeader = styled.div`
   text-align: center;
 `;
 
-const NextTransports = ({ stopData }: any) => {
+const NextTransports = ({ stopData }: { stopData: StopProps }) => {
   return (
     <TransportInfoContainer>
       <TransportInfoHeader>Departures (realtime)</TransportInfoHeader>
       {stopData.stoptimesWithoutPatterns.map(
-        (stopInformation: any, index: number) => (
+        (stopInformation: StopTimesProps, index: number) => (
           <StopInformation
             key={`stopInfo-${index}`}
             stopInformation={stopInformation}

@@ -1,3 +1,7 @@
+export interface EdgesProps {
+  node: { stop: StopProps; distance: number };
+}
+
 export interface StopProps {
   gtfsId: string;
   name: string;
@@ -7,7 +11,7 @@ export interface StopProps {
   lat: number;
   lng: number;
   distance: number;
-  stoptimesWithoutPatterns: StopTimesProps;
+  stoptimesWithoutPatterns: StopTimesProps[];
 }
 export interface StopTimesProps {
   scheduledArrival: number;

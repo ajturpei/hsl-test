@@ -2,6 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { getTime24h, getTransportationType } from "../utils/dataUtils";
 import GlobalContext from "../context/GlobalContext";
+import { StopTimesProps } from "../types/hslDataTypes";
 
 const fadeInOut = keyframes`
   0% {
@@ -84,7 +85,13 @@ const LineAndHeadSignContainer = styled.div`
   margin-left: 1rem;
 `;
 
-const StopInformation = ({ stopInformation, vehicleType }: any) => {
+const StopInformation = ({
+  stopInformation,
+  vehicleType,
+}: {
+  stopInformation: StopTimesProps;
+  vehicleType: number;
+}) => {
   const encodedCoordinates: string = stopInformation.trip.tripGeometry.points;
   const { setCurrentRoute } = React.useContext(GlobalContext);
   const { color } = getTransportationType(vehicleType);

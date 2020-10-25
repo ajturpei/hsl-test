@@ -26,17 +26,17 @@ const GeoLocate = () => {
     };
   }, [setGeoLocation]);
 
-  const success = ({ coords }: any) => {
-    setInitialLocation({ lat: coords.latitude, lng: coords.longitude });
-  };
-  const error = () => {
-    setShowOverlay(true);
-  };
   React.useEffect(() => {
+    const success = ({ coords }: any) => {
+      setInitialLocation({ lat: coords.latitude, lng: coords.longitude });
+    };
+    const error = () => {
+      setShowOverlay(true);
+    };
     navigator.geolocation.getCurrentPosition(success, error, {
       enableHighAccuracy: true,
     });
-  }, []);
+  }, [setInitialLocation, setShowOverlay]);
 
   if (showOverlay) {
     return <OverlayView />;

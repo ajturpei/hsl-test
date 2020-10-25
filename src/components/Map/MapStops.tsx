@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import getStopsByRadius from "../../graphql/queries/getStopsRadius";
 import GlobalContext from "../../context/GlobalContext";
 import StopMapCircle from "./StopMapCircle";
+import { EdgesProps } from "../../types/hslDataTypes";
 
 interface QueryArgs {
   lat: number;
@@ -10,6 +11,7 @@ interface QueryArgs {
   radius: number;
   first?: number;
 }
+
 const MapStops = () => {
   const { initialLocation, radiusInMeters } = React.useContext(GlobalContext);
   // TODO response args
@@ -25,35 +27,34 @@ const MapStops = () => {
   });
 
   const usedGtfsId: string[] = [];
-  let stops: any = [];
-  if (loading || error) {
+
+  if (loading || error || !data) {
     return <></>;
   }
-  if (data) {
-    stops = data.stopsByRadius.edges;
-  }
 
-  return stops?.map(({ node }: any, index: number) => {
-    const stopData = node.stop;
-    const { gtfsId, lat, lng } = stopData;
-    const distance = node.distance;
-    // TODO: filter duplicates (!!) in data out before map
-    if (usedGtfsId.indexOf(gtfsId) !== -1) {
-      return undefined;
+  return data?.stopsByRadius?.edges?.map(
+    ({ node }: EdgesProps, index: number) => {
+      const stopData = node.stop;
+      const { gtfsId, lat, lng } = stopData;
+      const distance = node.distance;
+      // TODO: filter duplicates (!!) in data out before map
+      if (usedGtfsId.indexOf(gtfsId) !== -1) {
+        return undefined;
+      }
+      usedGtfsId.push(gtfsId);
+      return (
+        <StopMapCircle
+          key={gtfsId}
+          stopId={stopData.gtfsId}
+          center={[lat, lng]}
+          radius={6}
+          stopData={stopData}
+          closest={index === 0}
+          distance={distance}
+        />
+      );
     }
-    usedGtfsId.push(gtfsId);
-    return (
-      <StopMapCircle
-        key={gtfsId}
-        stopId={stopData.gtfsId}
-        center={[lat, lng]}
-        radius={6}
-        stopData={stopData}
-        closest={index === 0}
-        distance={distance}
-      />
-    );
-  });
+  );
 };
 
 export default MapStops;

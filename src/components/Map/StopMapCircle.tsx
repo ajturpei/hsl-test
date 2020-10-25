@@ -4,10 +4,10 @@ import theme from "../../themes/theme";
 import styled from "styled-components";
 import NextTransports from "../NextTransports";
 import { getTransportationType } from "../../utils/dataUtils";
-import GlobalContext from "../../context/GlobalContext";
+import { StopProps } from "../../types/hslDataTypes";
 
 interface MyCircleProps extends CircleProps {
-  stopData: any;
+  stopData: StopProps;
   closest: boolean;
   distance: number;
   stopId: string;
@@ -65,7 +65,7 @@ const StopMapCircle = ({
             {distance} m ({transportationType.transportName}) ({code})
           </DistanceContainer>
           <div>
-            <NextTransports stopData={stopData} stopId={stopId} />
+            <NextTransports stopData={stopData} />
           </div>
         </StopInformation>
       </Popup>
