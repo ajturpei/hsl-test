@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "decode-google-map-polyline": "^1.0.1",
+    "jest-localstorage-mock": "^2.4.3",
     "prettier": "^2.1.2",
     "seconds-since-midnight": "^1.0.6",
     "tslint": "^6.1.3"

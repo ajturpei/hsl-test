@@ -33,7 +33,8 @@ export const getTransportationType = (transportType: number) => {
 export const getDefaultRadius = () => {
   const radius: string | null = localStorage?.getItem("HSLTestRadius");
   if (radius && !isNaN(parseInt(radius))) {
-    return parseInt(radius);
+    const radiusInt: number = parseInt(radius);
+    return radiusInt > config.maxRadius ? config.maxRadius : radiusInt;
   }
   return config.initialRadius;
 };

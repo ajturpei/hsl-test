@@ -6,6 +6,7 @@ import GlobalContext from "../context/GlobalContext";
 import useDebounce from "../utils/hooks/useDebounce";
 import InputSlider from "../styles/InputSlider";
 import useOutsideClick from "../utils/hooks/useOutsideClick";
+import config from "../utils/config";
 
 const MenuHeader = styled.h3`
   font-size: ${(p) => p.theme.fontSize.base};
@@ -99,7 +100,7 @@ const Menu = () => {
           type="range"
           min="0"
           step="20"
-          max="1000"
+          max={config.maxRadius}
           value={radiusInputValue}
           onChange={handleOnChange}
         />
