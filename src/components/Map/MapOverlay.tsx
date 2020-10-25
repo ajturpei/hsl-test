@@ -14,11 +14,12 @@ const MapContainer = styled.div`
 
 const MapOverlay = () => {
   const { initialLocation } = React.useContext(GlobalContext);
+  const mapRef: any = React.useRef();
   const position: LatLngExpression = [initialLocation.lat, initialLocation.lng];
 
   return (
     <MapContainer>
-      <LeafletMap center={position} zoom={17}>
+      <LeafletMap ref={mapRef} center={position} zoom={17}>
         <TileLayer
           url={`https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=${config.apiKey}`}
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

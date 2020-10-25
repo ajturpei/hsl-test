@@ -40,13 +40,8 @@ const StopMapCircle = ({
   distance,
   stopId,
 }: MyCircleProps) => {
-  const { setCurrentRoute } = React.useContext(GlobalContext);
   const transportationType = getTransportationType(stopData.vehicleType);
   const { code, name } = stopData;
-
-  const handleRouteRemove = () => {
-    setCurrentRoute({ color: null, coordinates: null });
-  };
 
   return (
     <Circle
@@ -63,7 +58,6 @@ const StopMapCircle = ({
         permanent={closest}
         maxWidth={320}
         minWidth={250}
-        onClose={handleRouteRemove}
       >
         <StopInformation>
           <StopHeader>{name}</StopHeader>

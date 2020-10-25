@@ -5,6 +5,7 @@ import MenuIconClose from "../assets/icons/x.svg";
 import GlobalContext from "../context/GlobalContext";
 import useDebounce from "../utils/hooks/useDebounce";
 import InputSlider from "../styles/InputSlider";
+import useOutsideClick from "../utils/hooks/useOutsideClick";
 
 const MenuHeader = styled.h3`
   font-size: ${(p) => p.theme.fontSize.base};
@@ -58,6 +59,7 @@ const Label = styled.label`
 `;
 
 const Menu = () => {
+  const ref = React.useRef<HTMLDivElement>(null);
   const { radiusInMeters, setRadiusInMeters } = React.useContext(GlobalContext);
   const [radiusInputValue, setRadiusInputValue] = React.useState(
     radiusInMeters
@@ -71,6 +73,12 @@ const Menu = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  useOutsideClick(ref, () => {
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+  });
   // Debounce radiusInmeters change so that context change doesn't every single onChange
   React.useEffect(() => {
     setRadiusInMeters(radiusInMetersDebounce);
@@ -78,7 +86,7 @@ const Menu = () => {
   }, [radiusInMetersDebounce, setRadiusInMeters]);
 
   return (
-    <MenuContainer menuOpen={menuOpen}>
+    <MenuContainer menuOpen={menuOpen} ref={ref}>
       <MenuImg
         src={menuOpen ? MenuIconClose : MenuIconOpen}
         onClick={toggleMenu}
