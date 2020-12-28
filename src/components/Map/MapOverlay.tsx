@@ -16,7 +16,6 @@ const MapOverlay = () => {
   const { initialLocation } = React.useContext(GlobalContext);
   const mapRef: any = React.useRef();
   const position: LatLngExpression = [initialLocation.lat, initialLocation.lng];
-
   return (
     <MapContainer>
       <LeafletMap ref={mapRef} center={position} zoom={17}>

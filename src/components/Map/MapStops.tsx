@@ -20,7 +20,6 @@ const MapStops = () => {
       lat: initialLocation.lat,
       lon: initialLocation.lng,
       radius: radiusInMeters,
-      first: 10,
     },
     pollInterval: 30000, // request every 30 sec
     skip: initialLocation.lat === 0 || initialLocation.lng === 0,
