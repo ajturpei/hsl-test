@@ -19,6 +19,8 @@ interface AppContextProps {
   setRadiusInMeters: React.Dispatch<React.SetStateAction<number>>;
   currentRoute: RouteProps;
   setCurrentRoute: React.Dispatch<React.SetStateAction<RouteProps>>;
+  stopData: any;
+  setStopData: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const GlobalContext = React.createContext<AppContextProps>({
@@ -31,6 +33,8 @@ const GlobalContext = React.createContext<AppContextProps>({
   setRadiusInMeters: (): void => {},
   currentRoute: { color: null, coordinates: null },
   setCurrentRoute: (): void => {},
+  setStopData: (): void => {},
+  stopData: null,
 });
 
 export default GlobalContext;

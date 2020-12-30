@@ -29,6 +29,8 @@ const GlobalContextComponent = ({ children }: GlobalContextProps) => {
     color: "black",
   });
 
+  const [stopData, setStopData] = React.useState<any>(null);
+
   // TODO: useReducer actions for setting new global states
 
   const GlobalContextData = {
@@ -40,6 +42,8 @@ const GlobalContextComponent = ({ children }: GlobalContextProps) => {
     setRadiusInMeters,
     currentRoute,
     setCurrentRoute,
+    stopData,
+    setStopData,
   };
 
   return (

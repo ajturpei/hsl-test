@@ -17,7 +17,7 @@ const NextTransports = ({ stopData }: { stopData: StopProps }) => {
   return (
     <TransportInfoContainer>
       <TransportInfoHeader>Departures (realtime)</TransportInfoHeader>
-      {stopData.stoptimesWithoutPatterns.map(
+      {stopData?.stoptimesWithoutPatterns?.map(
         (stopInformation: StopTimesProps, index: number) => (
           <StopInformation
             key={`stopInfo-${index}`}

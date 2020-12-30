@@ -32,8 +32,7 @@ const OverlayView = () => {
       <OverlayModal>
         <OverlayHeader>Geolocation is turned off :(</OverlayHeader>
         <h3>
-          Sorry You have to turn Geolocation on in order to use the
-          functionality
+          You have to turn Geolocation on in order to use the functionality
         </h3>
       </OverlayModal>
     </Overlay>

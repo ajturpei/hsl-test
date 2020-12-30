@@ -15,6 +15,16 @@ const MenuHeader = styled.h3`
   margin-bottom: 1rem;
 `;
 
+const Button = styled.button`
+  margin: 1rem 0;
+  padding: 0.35rem 1rem;
+  border-radius: 5px;
+  color: ${(p) => p.theme.color.white};
+  font-size: ${(p) => p.theme.fontSize.small};
+  border: none;
+  background: ${(p) => p.theme.color.hslBlue};
+`;
+
 const MenuContainer = styled.div<{ menuOpen: boolean }>`
   position: fixed;
   display: flex;
@@ -61,7 +71,11 @@ const Label = styled.label`
 
 const Menu = () => {
   const ref = React.useRef<HTMLDivElement>(null);
-  const { radiusInMeters, setRadiusInMeters } = React.useContext(GlobalContext);
+  const {
+    radiusInMeters,
+    setRadiusInMeters,
+    setCurrentRoute,
+  } = React.useContext(GlobalContext);
   const [radiusInputValue, setRadiusInputValue] = React.useState(
     radiusInMeters
   );
@@ -71,8 +85,13 @@ const Menu = () => {
   const handleOnChange = (e: any) => {
     setRadiusInputValue(e.target.value);
   };
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const clearRoute = () => {
+    setCurrentRoute({ color: null, coordinates: null });
   };
 
   useOutsideClick(ref, () => {
@@ -104,6 +123,7 @@ const Menu = () => {
           value={radiusInputValue}
           onChange={handleOnChange}
         />
+        <Button onClick={clearRoute}>Clear Route</Button>
       </MenuSelection>
     </MenuContainer>
   );

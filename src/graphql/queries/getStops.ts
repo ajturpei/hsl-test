@@ -16,11 +16,21 @@ export default gql`
         departureDelay
         realtime
         realtimeState
-        serviceDay
-        pickupType
         headsign
         trip {
           id
+          directionId
+          tripGeometry {
+            length
+            points
+          }
+          route {
+            shortName
+            stops {
+              name
+              gtfsId
+            }
+          }
         }
       }
     }

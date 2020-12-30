@@ -1,12 +1,15 @@
 import gql from "graphql-tag";
 
 export default gql`
-  query getStopTimetable($id: String!) {
-    stop(id: $id) {
+  query getStopsData($ids: [String]) {
+    stops(ids: $ids) {
+      gtfsId
       name
       code
       locationType
       vehicleType
+      lat
+      lng: lon
       stoptimesWithoutPatterns {
         scheduledArrival
         realtimeArrival

@@ -15,9 +15,10 @@ const App = () => {
       <div className="HSL-test-page">
         <ApolloProvider client={client}>
           <GlobalContextComponent>
-            <GeoLocate />
-            <Header />
-            <MapOverlay />
+            <GeoLocate>
+              <Header />
+              <MapOverlay />
+            </GeoLocate>
           </GlobalContextComponent>
         </ApolloProvider>
       </div>

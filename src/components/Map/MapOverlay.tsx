@@ -3,6 +3,7 @@ import { Map as LeafletMap, TileLayer, Marker } from "react-leaflet";
 import GlobalContext from "../../context/GlobalContext";
 import styled from "styled-components";
 import MapStops from "./MapStops";
+import Stops from "./Stops";
 import RouteOnMap from "./RouteOnMap";
 import config from "../../utils/config";
 import { LatLngExpression } from "leaflet";
@@ -13,18 +14,24 @@ const MapContainer = styled.div`
 `;
 
 const MapOverlay = () => {
-  const { initialLocation } = React.useContext(GlobalContext);
+  const { hslMap, initialPositionCoords } = config;
+  const { geoLocation } = React.useContext(GlobalContext);
   const mapRef: any = React.useRef();
-  const position: LatLngExpression = [initialLocation.lat, initialLocation.lng];
+  const position: LatLngExpression =
+    geoLocation.lat !== 0
+      ? [geoLocation.lat, geoLocation.lng]
+      : [initialPositionCoords.lat, initialPositionCoords.lng];
   return (
     <MapContainer>
       <LeafletMap ref={mapRef} center={position} zoom={17}>
         <TileLayer
-          url={`https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=${config.apiKey}`}
+          url={hslMap}
+          tileSize={256}
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         <Marker position={position} />
         <MapStops />
+        <Stops />
         <RouteOnMap />
       </LeafletMap>
     </MapContainer>

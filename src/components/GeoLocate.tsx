@@ -2,21 +2,27 @@ import React from "react";
 import GlobalContext from "../context/GlobalContext";
 import OverlayView from "./OverlayView";
 
-const GeoLocate = () => {
-  const { setGeoLocation, setInitialLocation } = React.useContext(
-    GlobalContext
-  );
+const GeoLocate = ({ children }: any) => {
+  const { setGeoLocation } = React.useContext(GlobalContext);
+
   const [showOverlay, setShowOverlay] = React.useState(false);
 
   React.useEffect(() => {
-    let watcher: any;
-    if (!navigator.geolocation) {
+    const success = ({ coords }: any) => {
+      setGeoLocation({
+        lat: Number(coords.latitude.toFixed(4)),
+        lng: Number(coords.longitude.toFixed(4)),
+      });
+    };
+    const error = () => {
       setShowOverlay(true);
-    }
+    };
+
+    let watcher: any;
     if (navigator.geolocation) {
       setShowOverlay(false);
-      watcher = navigator.geolocation.watchPosition(({ coords }) => {
-        setGeoLocation({ lat: coords.latitude, lng: coords.longitude });
+      watcher = navigator.geolocation.watchPosition(success, error, {
+        enableHighAccuracy: true,
       });
     }
     return () => {
@@ -24,24 +30,12 @@ const GeoLocate = () => {
         navigator?.geolocation?.clearWatch(watcher);
       }
     };
-  }, [setGeoLocation]);
-
-  React.useEffect(() => {
-    const success = ({ coords }: any) => {
-      setInitialLocation({ lat: coords.latitude, lng: coords.longitude });
-    };
-    const error = () => {
-      setShowOverlay(true);
-    };
-    navigator.geolocation.getCurrentPosition(success, error, {
-      enableHighAccuracy: true,
-    });
-  }, [setInitialLocation, setShowOverlay]);
+  }, [setGeoLocation, setShowOverlay]);
 
   if (showOverlay) {
     return <OverlayView />;
   }
-  return <></>;
+  return <>{children}</>;
 };
 
 export default GeoLocate;
