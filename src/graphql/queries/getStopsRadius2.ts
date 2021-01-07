@@ -18,6 +18,7 @@ export default gql`
             vehicleType
             lat
             lng: lon
+            platformCode
           }
           distance
         }

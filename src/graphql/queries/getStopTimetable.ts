@@ -7,7 +7,8 @@ export default gql`
       code
       locationType
       vehicleType
-      stoptimesWithoutPatterns {
+      platformCode
+      stoptimesWithoutPatterns(omitNonPickups: true, omitCanceled: false) {
         scheduledArrival
         realtimeArrival
         arrivalDelay

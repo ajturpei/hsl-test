@@ -44,7 +44,7 @@ const RenderPopup = ({
   stopId: string;
   distance: number;
   name: string;
-  code: number;
+  code: string;
   transportationType: any;
 }) => {
   const [fetchStopData, { loading, error, data, stopPolling }] = useLazyQuery<
@@ -70,6 +70,8 @@ const RenderPopup = ({
       stopPolling();
     }
   };
+
+  console.log(data);
 
   return (
     <Popup
@@ -100,7 +102,7 @@ const StopMapCircle = ({
   distance,
   stopId,
 }: MyCircleProps) => {
-  const { name, code } = stopData;
+  const { name, code, platformCode } = stopData;
   const transportationType = getTransportationType(stopData.vehicleType);
   return (
     <Circle
@@ -115,7 +117,7 @@ const StopMapCircle = ({
         stopId={stopId}
         distance={distance}
         name={name}
-        code={code}
+        code={platformCode || code}
         transportationType={transportationType}
       />
     </Circle>

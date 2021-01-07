@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { getTime24h, getTransportationType } from "../utils/dataUtils";
 import GlobalContext from "../context/GlobalContext";
 import { StopTimesProps } from "../types/hslDataTypes";
@@ -17,12 +17,17 @@ const fadeInOut = keyframes`
   }
 `;
 
+const animate = css`
+  animation: ${fadeInOut} 2s linear infinite;
+`;
+
 const ScheduleIndicator = styled.span<{
   isDelayed: boolean;
+  isRealtime: boolean;
 }>`
   font-size: ${(p) => p.theme.fontSize.h2};
   color: ${(p) => (p.isDelayed ? "red" : "green")};
-  animation: ${fadeInOut} 2s linear infinite;
+  ${(p) => p.isRealtime && animate}
 `;
 
 const LineNumber = styled.span`
@@ -95,7 +100,12 @@ const StopInformation = ({
   const encodedCoordinates: string = stopInformation.trip.tripGeometry.points;
   const { setCurrentRoute } = React.useContext(GlobalContext);
   const { color } = getTransportationType(vehicleType);
-  const { realtimeDeparture, headsign, arrivalDelay } = stopInformation;
+  const {
+    realtime,
+    realtimeDeparture,
+    headsign,
+    arrivalDelay,
+  } = stopInformation;
   const { shortName: lineNumber } = stopInformation.trip.route;
   const isDelayed: boolean = arrivalDelay > 0;
   const realtimeDepartureTime = getTime24h(realtimeDeparture);
@@ -107,7 +117,9 @@ const StopInformation = ({
   return (
     <StopInformationContainer onClick={handleSetRoute}>
       <ShowRoute>show route</ShowRoute>
-      <ScheduleIndicator isDelayed={isDelayed}>•</ScheduleIndicator>
+      <ScheduleIndicator isDelayed={isDelayed} isRealtime={realtime}>
+        •
+      </ScheduleIndicator>
       <Time>{realtimeDepartureTime}</Time>
       <LineAndHeadSignContainer>
         <LineNumber>{lineNumber}</LineNumber>

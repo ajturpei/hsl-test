@@ -1,6 +1,6 @@
 import React from "react";
 import { useApolloClient } from "@apollo/client";
-import getStopsByRadius from "../../graphql/queries/getStopsRadius";
+import getStopsByRadius2 from "../../graphql/queries/getStopsRadius2";
 import GlobalContext from "../../context/GlobalContext";
 
 interface QueryArgs {
@@ -19,7 +19,7 @@ const MapStops = () => {
   React.useEffect(() => {
     const getStops = async () => {
       const { data: stopsResponse } = await client.query({
-        query: getStopsByRadius,
+        query: getStopsByRadius2,
         fetchPolicy: "no-cache",
         notifyOnNetworkStatusChange: true,
         variables: {

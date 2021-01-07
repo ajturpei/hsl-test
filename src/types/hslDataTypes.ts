@@ -5,9 +5,10 @@ export interface EdgesProps {
 export interface StopProps {
   gtfsId: string;
   name: string;
-  code: number;
+  code: string;
   locationType: number;
   vehicleType: number;
+  platformCode: string;
   lat: number;
   lng: number;
   distance: number;
@@ -20,7 +21,7 @@ export interface StopTimesProps {
   scheduledDeparture: number;
   realtimeDeparture: number;
   departureDelay: number;
-  realtime: string;
+  realtime: boolean;
   realtimeState: string;
   headsign: string;
   trip: TripProps;
