@@ -71,8 +71,6 @@ const RenderPopup = ({
     }
   };
 
-  console.log(data);
-
   return (
     <Popup
       direction="right"
