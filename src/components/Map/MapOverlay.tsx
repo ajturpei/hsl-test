@@ -6,7 +6,6 @@ import MapStops from "./MapStops";
 import Stops from "./Stops";
 import RouteOnMap from "./RouteOnMap";
 import config from "../../utils/config";
-import { LatLngExpression } from "leaflet";
 import { isEqual } from "lodash";
 
 const MapContainer = styled.div`
