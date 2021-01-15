@@ -66,7 +66,7 @@ const Vehicle = () => {
 
   return (
     <>
-      {Object.keys(subscriptions.current).map((key) => {
+      {Object.keys(subscriptions.current).map((key: string) => {
         const { lat, long, hdg, spd } = subscriptions.current[key];
         const icon = divIcon({
           html: ReactDOMServer.renderToString(
