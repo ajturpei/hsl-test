@@ -19,6 +19,7 @@ export default gql`
         realtimeState
         headsign
         trip {
+          gtfsId
           id
           directionId
           tripGeometry {
@@ -26,6 +27,7 @@ export default gql`
             points
           }
           route {
+            gtfsId
             shortName
             stops {
               name

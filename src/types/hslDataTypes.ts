@@ -31,6 +31,7 @@ export interface TripProps {
   directionId: number;
   tripGeometry: TripGeometryProps;
   route: RouteProps;
+  gtfsId?: string;
 }
 
 export interface TripGeometryProps {
@@ -39,6 +40,7 @@ export interface TripGeometryProps {
 }
 export interface RouteProps {
   shortName: string;
+  gtfsId: string;
   stops: {
     name: string;
     gtfsId: string;

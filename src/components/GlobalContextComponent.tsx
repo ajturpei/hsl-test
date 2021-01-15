@@ -2,6 +2,7 @@ import React from "react";
 import GlobalContext, {
   LocationProps,
   RouteProps,
+  VehicleProps,
 } from "../context/GlobalContext";
 import { getDefaultRadius } from "../utils/dataUtils";
 
@@ -30,8 +31,11 @@ const GlobalContextComponent = ({ children }: GlobalContextProps) => {
   });
 
   const [stopData, setStopData] = React.useState<any>(null);
-
-  // TODO: useReducer actions for setting new global states
+  const [vehicleData, setVehicleData] = React.useState<VehicleProps>({
+    vehicleType: -1,
+    direction: "",
+    vehicleCode: "",
+  });
 
   const GlobalContextData = {
     initialLocation,
@@ -44,6 +48,8 @@ const GlobalContextComponent = ({ children }: GlobalContextProps) => {
     setCurrentRoute,
     stopData,
     setStopData,
+    vehicleData,
+    setVehicleData,
   };
 
   return (

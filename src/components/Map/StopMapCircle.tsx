@@ -4,9 +4,13 @@ import { useLazyQuery } from "@apollo/client";
 import theme from "../../themes/theme";
 import styled from "styled-components";
 import NextTransports from "../NextTransports";
-import { getTransportationType } from "../../utils/dataUtils";
+import {
+  getTransportationType,
+  getIconForVehicleType,
+} from "../../utils/dataUtils";
 import { StopProps } from "../../types/hslDataTypes";
 import getStopTimetable from "../../graphql/queries/getStopTimetable";
+import { blink } from "../StopInformation";
 
 interface MyCircleProps extends CircleProps {
   stopData: StopProps;
@@ -34,23 +38,46 @@ const StopHeader = styled.h2`
   margin-bottom: 0;
 `;
 
+const IconImg = styled.img`
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem auto;
+`;
+
+const TransportInfoHeader = styled.div`
+  margin-top: 0.25rem;
+  font-size: ${(p) => p.theme.fontSize.small};
+  color: ${(p) => p.theme.color.grayLight};
+  text-align: center;
+`;
+
+const Blink = styled.span`
+  ${blink};
+`;
+
+const NoBlink = styled(Blink)`
+  animation: none;
+`;
+
 const RenderPopup = ({
   stopId,
   distance,
   name,
-  transportationType,
+  vehicleType,
   code,
 }: {
   stopId: string;
   distance: number;
   name: string;
   code: string;
-  transportationType: any;
+  vehicleType: number;
 }) => {
   const [fetchStopData, { loading, error, data, stopPolling }] = useLazyQuery<
     any,
     any
   >(getStopTimetable, {
+    fetchPolicy: "no-cache",
     variables: {
       id: stopId,
     },
@@ -71,23 +98,34 @@ const RenderPopup = ({
     }
   };
 
+  const Icon = getIconForVehicleType(vehicleType);
+  const { color: vehicleTypeColor } = getTransportationType(vehicleType);
+
   return (
     <Popup
-      direction="right"
-      opacity={1}
       maxWidth={320}
       minWidth={250}
       onOpen={fetchStopData}
       onClose={stopFetching}
+      autoPan={false}
     >
       {loading && <div>Loading...</div>}
       {error && <div>Error fetching info</div>}
       <StopInformation>
-        <StopHeader>{name}</StopHeader>
-        <DistanceContainer borderColor={transportationType.color}>
-          {distance} m ({transportationType.transportName}) ({code})
+        <StopHeader>
+          <IconImg src={Icon} />
+          {name}
+        </StopHeader>
+        <DistanceContainer borderColor={vehicleTypeColor}>
+          {distance} m ({code})
         </DistanceContainer>
         <div>{data && <NextTransports stopData={data.stop} />}</div>
+        <TransportInfoHeader>
+          <div>
+            <Blink>•</Blink> Realtime Departure
+          </div>
+          <NoBlink>•</NoBlink> Scheduled departure
+        </TransportInfoHeader>
       </StopInformation>
     </Popup>
   );
@@ -100,8 +138,8 @@ const StopMapCircle = ({
   distance,
   stopId,
 }: MyCircleProps) => {
-  const { name, code, platformCode } = stopData;
-  const transportationType = getTransportationType(stopData.vehicleType);
+  const { name, code, platformCode, vehicleType } = stopData;
+  const transportationType = getTransportationType(vehicleType);
   return (
     <Circle
       center={center}
@@ -116,7 +154,7 @@ const StopMapCircle = ({
         distance={distance}
         name={name}
         code={platformCode || code}
-        transportationType={transportationType}
+        vehicleType={vehicleType}
       />
     </Circle>
   );

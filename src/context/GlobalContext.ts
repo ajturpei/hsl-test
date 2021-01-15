@@ -8,6 +8,13 @@ export interface LocationProps {
 export interface RouteProps {
   color: string | null;
   coordinates: string | null;
+  gtfsId?: string;
+}
+
+export interface VehicleProps {
+  vehicleType: number;
+  direction: string;
+  vehicleCode: string;
 }
 
 interface AppContextProps {
@@ -21,6 +28,8 @@ interface AppContextProps {
   setCurrentRoute: React.Dispatch<React.SetStateAction<RouteProps>>;
   stopData: any;
   setStopData: React.Dispatch<React.SetStateAction<any>>;
+  setVehicleData: React.Dispatch<React.SetStateAction<VehicleProps>>;
+  vehicleData: VehicleProps;
 }
 
 const GlobalContext = React.createContext<AppContextProps>({
@@ -35,6 +44,8 @@ const GlobalContext = React.createContext<AppContextProps>({
   setCurrentRoute: (): void => {},
   setStopData: (): void => {},
   stopData: null,
+  setVehicleData: (): void => {},
+  vehicleData: { vehicleType: -1, direction: "", vehicleCode: "" },
 });
 
 export default GlobalContext;

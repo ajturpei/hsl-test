@@ -8,20 +8,19 @@ import Header from "./components/Header";
 import GlobalContextComponent from "./components/GlobalContextComponent";
 import GeoLocate from "./components/GeoLocate";
 import MapOverlay from "./components/Map/MapOverlay";
-
+import GlobalStyle from "./themes/globalStyle";
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <div className="HSL-test-page">
-        <ApolloProvider client={client}>
-          <GlobalContextComponent>
-            <GeoLocate>
-              <Header />
-              <MapOverlay />
-            </GeoLocate>
-          </GlobalContextComponent>
-        </ApolloProvider>
-      </div>
+      <GlobalStyle />
+      <ApolloProvider client={client}>
+        <GlobalContextComponent>
+          <GeoLocate>
+            <Header />
+            <MapOverlay />
+          </GeoLocate>
+        </GlobalContextComponent>
+      </ApolloProvider>
     </ThemeProvider>
   );
 };

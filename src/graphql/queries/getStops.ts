@@ -25,6 +25,7 @@ export default gql`
             points
           }
           route {
+            gtfsId
             shortName
             stops {
               name

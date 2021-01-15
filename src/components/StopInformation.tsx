@@ -1,6 +1,10 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
-import { getTime24h, getTransportationType } from "../utils/dataUtils";
+import {
+  getTime24h,
+  getTransportationType,
+  getMinutes,
+} from "../utils/dataUtils";
 import GlobalContext from "../context/GlobalContext";
 import { StopTimesProps } from "../types/hslDataTypes";
 
@@ -17,7 +21,7 @@ const fadeInOut = keyframes`
   }
 `;
 
-const animate = css`
+export const blink = css`
   animation: ${fadeInOut} 2s linear infinite;
 `;
 
@@ -27,7 +31,9 @@ const ScheduleIndicator = styled.span<{
 }>`
   font-size: ${(p) => p.theme.fontSize.h2};
   color: ${(p) => (p.isDelayed ? "red" : "green")};
-  ${(p) => p.isRealtime && animate}
+  margin-right: 0.25rem;
+  margin-top: 2px;
+  ${(p) => p.isRealtime && blink};
 `;
 
 const LineNumber = styled.span`
@@ -39,6 +45,12 @@ const Time = styled.span`
   font-size: ${(p) => p.theme.fontSize.big};
   margin-left: 0.25rem;
   width: 3rem;
+`;
+
+const Delay = styled.span`
+  display: block;
+  font-size: ${(p) => p.theme.fontSize.xsmall};
+  color: ${(p) => p.theme.color.grayLight};
 `;
 
 const HeadSign = styled.span`
@@ -65,9 +77,6 @@ const StopInformationContainer = styled.div`
   align-items: center;
   font-weight: ${(p) => p.theme.fontWeight.normal};
   font-size: ${(p) => p.theme.fontSize.base};
-  margin-top: 0.25rem;
-  background: #8080801a;
-  padding: 0 0.25rem;
   ${ShowRoute} {
     opacity: 0;
   }
@@ -90,15 +99,24 @@ const LineAndHeadSignContainer = styled.div`
   margin-left: 1rem;
 `;
 
+const getVehicleValues = (vehicleData: string, vehicleType: number) => {
+  const splittedId = vehicleData.split("_");
+  const vehicleCode = splittedId[0].split(":")[1];
+  const direction = splittedId[3];
+  return { vehicleType, direction, vehicleCode };
+};
+
 const StopInformation = ({
   stopInformation,
   vehicleType,
+  isFirst,
 }: {
   stopInformation: StopTimesProps;
   vehicleType: number;
+  isFirst: boolean;
 }) => {
   const encodedCoordinates: string = stopInformation.trip.tripGeometry.points;
-  const { setCurrentRoute } = React.useContext(GlobalContext);
+  const { setCurrentRoute, setVehicleData } = React.useContext(GlobalContext);
   const { color } = getTransportationType(vehicleType);
   const {
     realtime,
@@ -106,9 +124,17 @@ const StopInformation = ({
     headsign,
     arrivalDelay,
   } = stopInformation;
+  const { gtfsId: vehicleCoding = "" } = stopInformation.trip;
   const { shortName: lineNumber } = stopInformation.trip.route;
   const isDelayed: boolean = arrivalDelay > 0;
+  const delay = isDelayed && getMinutes(arrivalDelay);
   const realtimeDepartureTime = getTime24h(realtimeDeparture);
+  React.useEffect(() => {
+    if (isFirst) {
+      const vehicleDataObj = getVehicleValues(vehicleCoding, vehicleType);
+      setVehicleData(vehicleDataObj);
+    }
+  }, [isFirst, setVehicleData, vehicleCoding, vehicleType]);
 
   const handleSetRoute = () => {
     setCurrentRoute({ color, coordinates: encodedCoordinates });
@@ -120,7 +146,9 @@ const StopInformation = ({
       <ScheduleIndicator isDelayed={isDelayed} isRealtime={realtime}>
         •
       </ScheduleIndicator>
-      <Time>{realtimeDepartureTime}</Time>
+      <Time>
+        {realtimeDepartureTime} {delay && <Delay>~{delay} late</Delay>}
+      </Time>
       <LineAndHeadSignContainer>
         <LineNumber>{lineNumber}</LineNumber>
         <HeadSign>{headsign}</HeadSign>
