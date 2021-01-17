@@ -32,9 +32,15 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}  
     # Runs a set of commands using the runners shell
-    - name: run ci
+    - name: Npm install client
+      working-directory: ./client
       run: |
-        npm ci
+         npm install
+    - name: Npm build client
+      working-directory: ./client
+      run: |
+         npm run build
+    - name: Deploy to S3 
     - name: Deploy to S3 bucket
       uses: jakejarvis/s3-sync-action@master
       with:
