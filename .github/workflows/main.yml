@@ -37,7 +37,6 @@ jobs:
          yarn install
     - name: Npm build client & server
       run: |
-         yarn server
          yarn client
     - name: Deploy to S3 bucket
       uses: jakejarvis/s3-sync-action@master
