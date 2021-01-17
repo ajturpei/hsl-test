@@ -1,0 +1,25 @@
+{
+  "name": "mqtt-graphql-hsl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.19.1",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "graphql-mqtt-subscriptions": "^1.2.0",
+    "mqtt": "^4.2.6",
+    "prettier": "^2.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

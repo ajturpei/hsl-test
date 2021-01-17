@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.36d94c94.chunk.css",
+    "main.js": "/static/js/main.0779bbd3.chunk.js",
+    "main.js.map": "/static/js/main.0779bbd3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0aebbf6b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0aebbf6b.js.map",
+    "static/js/2.614a869c.chunk.js": "/static/js/2.614a869c.chunk.js",
+    "static/js/2.614a869c.chunk.js.map": "/static/js/2.614a869c.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.fb19514fdca3ecec2db48437fa7568ab.js": "/precache-manifest.fb19514fdca3ecec2db48437fa7568ab.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.36d94c94.chunk.css.map": "/static/css/main.36d94c94.chunk.css.map",
+    "static/js/2.614a869c.chunk.js.LICENSE.txt": "/static/js/2.614a869c.chunk.js.LICENSE.txt",
+    "static/media/bus.svg": "/static/media/bus.e832c78f.svg",
+    "static/media/ferry.svg": "/static/media/ferry.1717a18b.svg",
+    "static/media/menu.svg": "/static/media/menu.597d55c7.svg",
+    "static/media/subway.svg": "/static/media/subway.68e26a10.svg",
+    "static/media/train.svg": "/static/media/train.6e260072.svg",
+    "static/media/tram.svg": "/static/media/tram.008e5640.svg",
+    "static/media/triangle.svg": "/static/media/triangle.0af5b0f0.svg",
+    "static/media/vehicle.svg": "/static/media/vehicle.cb8deca8.svg",
+    "static/media/x.svg": "/static/media/x.6a954980.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0aebbf6b.js",
+    "static/js/2.614a869c.chunk.js",
+    "static/css/main.36d94c94.chunk.css",
+    "static/js/main.0779bbd3.chunk.js"
+  ]
+}
