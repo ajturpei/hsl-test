@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "client": "yarn workspace client start",
+    "client": "yarn workspace client build",
     "server": "yarn workspace server start",
     "start": "concurrently --kill-others-on-fail 'yarn server' 'yarn client'"
   },
