@@ -10,7 +10,10 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: config.mqttVPAPI,
+  uri:
+    process.env.REACT_APP_STAGE === "production"
+      ? config.mqttVPAPIProd
+      : config.mqttVPAPIDev,
   options: {
     reconnect: true,
   },
