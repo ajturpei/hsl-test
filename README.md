@@ -7,7 +7,6 @@ This was a bit of polished POC version utilising the HSL Api for Graphql, React-
 Ideas for the future:
 
 - Implement & design stations view
-- POC uses initial location. Add automatic geolocation update and update stops if closest stops change
 - Investigate more accurate geolocation e.g. from Google
 - Port the code into React Native since the app is most useful with a mobile device.
 - Add timeslots and address like home or work so that app can only suggest closest stops and realtime timetables that would try to guide you only routes and stops that are helping you to get there.
