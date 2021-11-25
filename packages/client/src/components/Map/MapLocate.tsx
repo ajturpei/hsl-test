@@ -1,7 +1,6 @@
 import React from "react";
-import { useMap, useMapEvents } from "react-leaflet";
-import { divIcon } from "leaflet";
-import Triangle from "../../assets/icons/triangle.svg";
+import { useMap } from "react-leaflet";
+import Location from "../../assets/icons/location.svg";
 import styled from "styled-components";
 import GlobalContext from "../../context/GlobalContext";
 
@@ -14,6 +13,11 @@ const LocateContainer = styled.div`
   height: 50px;
 `;
 
+const Image = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
 const MapLocate = () => {
   const { geoLocation } = React.useContext(GlobalContext);
   const map = useMap();
@@ -21,7 +25,11 @@ const MapLocate = () => {
     map.setView(geoLocation, 17);
   };
 
-  return <LocateContainer onClick={handleLocate}>test</LocateContainer>;
+  return (
+    <LocateContainer onClick={handleLocate}>
+      <Image src={Location} alt="show my location" />
+    </LocateContainer>
+  );
 };
 
 export default MapLocate;
