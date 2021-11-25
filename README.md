@@ -12,12 +12,10 @@ Ideas for the future:
 - Port the code into React Native since the app is most useful with a mobile device.
 - Add timeslots and address like home or work so that app can only suggest closest stops and realtime timetables that would try to guide you only routes and stops that are helping you to get there.
 
-## Starting the app
+## Starting the app locally
 
-`npm i`
-`npm run start`
+- install packages (client & mqtt server) `yarn`
+- start client `cd packages/client && yarn develop`
+- start server `cd packages/server && yarn dev`
 
-App must be run in https:// to enable browser location as it relys on user's location. <br />
-Open [https://localhost:3000](https://localhost:3000) to view it in the browser.
-
-Transportation map was used and it requires an API key
+For Transportation map, requires an API key
