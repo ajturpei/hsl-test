@@ -12,6 +12,7 @@ import Stops from "./Stops";
 import RouteOnMap from "./RouteOnMap";
 import config from "../../utils/config";
 import Vehicle from "./Vehicle";
+import MapLocate from "./MapLocate";
 
 const MapContainer = styled.div`
   width: 100%;
@@ -46,6 +47,7 @@ const MapOverlay = () => {
         <Stops />
         <RouteOnMap />
         <Vehicle />
+        <MapLocate />
       </LeafletMap>
     </MapContainer>
   );
