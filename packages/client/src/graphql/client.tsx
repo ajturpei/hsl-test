@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import config from "../utils/config";
-
+import { setContext } from '@apollo/client/link/context';
 import { split, HttpLink } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/client/link/ws";
@@ -17,6 +17,15 @@ const wsLink = new WebSocketLink({
   options: {
     reconnect: true,
   },
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      'digitransit-subscription-key': config.subscriptionKey,
+    }
+  }
 });
 
 // The split function takes three parameters:
@@ -38,7 +47,7 @@ const splittedLink = split(
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: splittedLink,
+  link: authLink.concat(splittedLink),
 });
 
 export default client;

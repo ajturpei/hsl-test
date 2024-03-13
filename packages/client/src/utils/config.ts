@@ -4,12 +4,11 @@ const config = {
   mqttVPAPIDev: "ws://localhost:4000/graphql",
   mqttVPAPIProd:
     "wss://hslrealtime-env.eba-pqmaifhs.eu-north-1.elasticbeanstalk.com:4000/graphql",
-  mapEndpoint:
-    "https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=",
-  hslMap: "https://cdn.digitransit.fi/map/v1/hsl-map/{z}/{x}/{y}@2x.png",
+  hslMap: "https://cdn.digitransit.fi/map/v2/hsl-map/{z}/{x}/{y}.png",
   initialRadius: 150,
   maxRadius: 1200,
   initialPositionCoords: { lat: 60.1699, lng: 24.9384 },
+  subscriptionKey: "6ed8fefc822748f2bdfc6ba367fd1317",
 };
 
 export default config;

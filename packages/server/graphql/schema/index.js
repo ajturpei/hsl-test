@@ -7,6 +7,7 @@ const typeDefs = gql`
     hdg: Int!
     lat: Float!
     long: Float!
+    desi: String!
   }
   type Subscription {
     subscribe2vehicleData(topic: String!): VehicleData!

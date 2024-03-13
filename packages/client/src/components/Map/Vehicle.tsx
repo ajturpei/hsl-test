@@ -33,7 +33,7 @@ const Vehicle = () => {
   const SvgIcon = getIconForVehicleType(vehicleType);
   const subscriptions: any = React.useRef({});
   const prevVehicleCode = React.useRef<string | null>(null);
-  const topic = `/hfp/v2/journey/+/vp/+/+/+/${vehicleCode}/${direction}/#`;
+  const topic = `/hfp/v2/journey/+/vp/+/+/+/${vehicleCode}/+/#`;
   const { data } = useSubscription(getRealtimeVehicleData, {
     variables: { topic },
     shouldResubscribe: vehicleCode + direction !== prevVehicleCode?.current,
@@ -71,10 +71,10 @@ const Vehicle = () => {
         const icon = divIcon({
           html: ReactDOMServer.renderToString(
             <>
-              <Image src={SvgIcon} alt="vehicle" moving={spd > 1} />
+              <Image src={SvgIcon} alt='vehicle' moving={spd > 1} />
               <Image2
                 src={Triangle}
-                alt="vehicle"
+                alt='vehicle'
                 degrees={hdg}
                 moving={spd > 1}
               />

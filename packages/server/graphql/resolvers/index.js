@@ -21,13 +21,15 @@ const resolvers = {
     subscribe2vehicleData: {
       resolve: (payload) => {
         try {
-          const { spd, hdg, lat, long, start } = payload.VP;
+          const { spd, hdg, lat, long, start, desi } = payload?.VP || {};
+
           return {
-            spd,
-            hdg,
-            lat,
-            long,
-            start,
+            spd: spd || 0,
+            hdg: hdg || 0,
+            lat: lat || 0,
+            long: long || 0,
+            start: start || "",
+            desi: desi || "",
           };
         } catch (e) {
           console.log(e);
