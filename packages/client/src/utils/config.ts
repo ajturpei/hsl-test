@@ -1,5 +1,5 @@
 const config = {
-  apiKey: "5e581f69ad9c4225a83ac21d4bf37809",
+  apiKey: process.env.REACT_APP_API_KEY,
   graphqlAPI: "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql",
   mqttVPAPIDev: "ws://localhost:4000/graphql",
   mqttVPAPIProd:
@@ -8,7 +8,7 @@ const config = {
   initialRadius: 150,
   maxRadius: 1200,
   initialPositionCoords: { lat: 60.1699, lng: 24.9384 },
-  subscriptionKey: "6ed8fefc822748f2bdfc6ba367fd1317",
+  subscriptionKey: process.env.REACT_APP_SUBSCRIPTION_KEY,
 };
 
 export default config;
