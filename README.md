@@ -14,6 +14,8 @@ Ideas for the future:
 ## Starting the app locally
 
 - install packages (client & mqtt server) `yarn`
+- rename .env_example to env
+- copy needed keys to env
 - start client `cd packages/client && yarn develop`
 - start server `cd packages/server && yarn dev`
 
